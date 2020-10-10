@@ -1,0 +1,22 @@
+Package: siga
+Title: Descargar y Leer Datos del SIGA
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Elio",
+           family = "Campitelli",
+           role = c("cre", "aut"),
+           email = "elio.campitelli@cima.fcen.uba.ar",
+           comment = c(ORCID = "0000-0002-7742-9230"))
+Description: Descarga y lee datos del Sistema de Información y Gestión 
+   Agrometeorológica del INTA <http://siga.inta.gov.ar/>.
+License: GPL-3
+Encoding: UTF-8
+Language: es
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
+Imports: 
+    data.table,
+    readxl
