@@ -117,7 +117,8 @@ siga_estaciones <- function(archivo = file.path(tempdir(), "siga_metadatos.csv")
 
   if (must_download) {
     message(gettextf("Descargando estaciones y guardando en %s.", archivo))
-    url <- "http://siga.inta.gov.ar/o7XxvTszIMc0EShb.php?param_type=estacion&param_value="
+    url <- stations_url()
+
     json <- jsonlite::read_json(url)
 
     campos <- c("idInterno", "nombre", "tipo", "localidad", "provincia",
@@ -141,5 +142,23 @@ siga_estaciones <- function(archivo = file.path(tempdir(), "siga_metadatos.csv")
   metadatos
 }
 
+stations_url <- function() {
+  servers <- "http://siga.inta.gov.ar/js/urlserver.js"
+
+  file <- tempfile()
+  download.file(servers, file)
+
+  lines <- suppressWarnings(readLines(file))
+  l <- grep("^var URL_MYSQL_ESTACION =", lines)[1]
+  lines[l]
+
+  line <- strsplit(lines[l], " = ")[[1]][2]
+  line <- regmatches(line, regexpr("'.*'", line))
+  line <- gsub("'", "", line)
+
+  url <- paste0("http://siga.inta.gov.ar/", line)
+
+  return(url)
+}
 
 .datatable.aware <- TRUE

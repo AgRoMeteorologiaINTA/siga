@@ -1,6 +1,6 @@
 Package: siga
 Title: Descargar y Leer Datos del SIGA
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
