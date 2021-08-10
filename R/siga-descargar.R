@@ -150,7 +150,6 @@ stations_url <- function() {
 
   lines <- suppressWarnings(readLines(file))
   l <- grep("^var URL_MYSQL_ESTACION =", lines)[1]
-  lines[l]
 
   line <- strsplit(lines[l], " = ")[[1]][2]
   line <- regmatches(line, regexpr("'.*'", line))
