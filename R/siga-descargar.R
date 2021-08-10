@@ -63,10 +63,10 @@ siga_descargar <- function(ids, dir = tempdir(), forzar = TRUE) {
         next
       }
 
-      data <- try(readxl::read_excel(locations[i], col_types = col_types), silent = TRUE)
+      data <- try(suppressWarnings(readxl::read_excel(locations[i], col_types = col_types)), silent = TRUE)
 
       if (inherits(data, "try-error")) {
-        data <- readxl::read_excel(locations[i], col_types = col_types2)
+        data <- suppressWarnings(readxl::read_excel(locations[i], col_types = col_types2))
       }
 
       colnames(data) <- tolower(colnames(data))
