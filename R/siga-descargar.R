@@ -168,7 +168,7 @@ stations_url <- function() {
   servers <- "http://siga.inta.gov.ar/js/urlserver.js"
 
   file <- tempfile()
-  download.file(servers, file, quiet = TRUE)
+  utils::download.file(servers, file, quiet = TRUE)
 
   lines <- suppressWarnings(readLines(file))
   l <- grep("^var URL_MYSQL_ESTACION =", lines)[1]
