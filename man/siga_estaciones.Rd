@@ -2,7 +2,7 @@
 % Please edit documentation in R/siga-descargar.R
 \name{siga_estaciones}
 \alias{siga_estaciones}
-\title{Estaciones disponibles en SIGA}
+\title{Estaciones disponibles en el SIGA}
 \usage{
 siga_estaciones(
   archivo = file.path(tempdir(), "siga_metadatos.csv"),
@@ -10,13 +10,19 @@ siga_estaciones(
 )
 }
 \arguments{
-\item{archivo}{Caracter con la ruta al archivo donde guardar la lista de estaciones.}
+\item{archivo}{Caracter, indica la ruta al archivo donde guardará la lista de estaciones.
+Por defecto se guarda en un directorio temporal.}
 
-\item{forzar}{Forzar la descarga de archivos ya descargados.}
+\item{forzar}{Lógico, si es TRUE, fuerza la descarga del archivo de metadatos ya descargado.}
 }
 \value{
-Un data.frame
+Un data.frame con metadatos de las estaciones.
 }
 \description{
-Estaciones disponibles en SIGA
+La función descarga los metadatos de las estaciones meteorológicas disponibles en el SIGA.
+}
+\examples{
+estaciones <- siga_estaciones()
+head(estaciones)
+
 }

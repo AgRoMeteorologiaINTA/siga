@@ -1,13 +1,28 @@
 #' Descarga archivos del SIGA
 #'
+#' Esta familia de funciones permite leer y descargar archivos con datos
+#' meteorológicos y sus metadatos desde SIGA.
+#'
 #' @param ids Vector de ids con estaciones o un data.frame con una
 #' columna llamada "id" con las ids de las estaciones (por ejemplo, el
-#' devuelto por [siga_estaciones()]).
-#' @param dir Directorio donde descargar los datos.
+#' data.frame devuelto por [siga_estaciones()]).
+#' @param dir Caracter, directorio donde descargar los datos. Por defecto
+#' se descargan los datos en un directorio temporal.
 #' @param forzar Forzar la descarga de archivos ya descargados.
 #'
 #' @return
 #' data.frames
+#'
+#' @examples
+#' estaciones <- siga_estaciones()
+#' ids <- estaciones[1:2, ]
+#' siga_datos(ids)
+#'
+#' # Metadatos
+#' siga_metadatos(ids)
+#'
+#' # Descarga directa
+#' siga_descargar(ids)
 #'
 #' @export
 siga_datos <- function(ids, dir = tempdir(), forzar = FALSE) {
@@ -101,13 +116,20 @@ siga_descargar <- function(ids, dir = tempdir(), forzar = TRUE) {
 
 
 
-#' Estaciones disponibles en SIGA
+#' Estaciones disponibles en el SIGA
 #'
-#' @param archivo Caracter con la ruta al archivo donde guardar la lista de estaciones.
-#' @param forzar Forzar la descarga de archivos ya descargados.
+#' La función descarga los metadatos de las estaciones meteorológicas disponibles en el SIGA.
+#'
+#' @param archivo Caracter, indica la ruta al archivo donde guardará la lista de estaciones.
+#' Por defecto se guarda en un directorio temporal.
+#' @param forzar Lógico, si es TRUE, fuerza la descarga del archivo de metadatos ya descargado.
 #'
 #' @return
-#' Un data.frame
+#' Un data.frame con metadatos de las estaciones.
+#'
+#' @examples
+#' estaciones <- siga_estaciones()
+#' head(estaciones)
 #'
 #' @export
 siga_estaciones <- function(archivo = file.path(tempdir(), "siga_metadatos.csv"), forzar = FALSE) {

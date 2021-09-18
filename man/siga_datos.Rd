@@ -15,9 +15,10 @@ siga_descargar(ids, dir = tempdir(), forzar = TRUE)
 \arguments{
 \item{ids}{Vector de ids con estaciones o un data.frame con una
 columna llamada "id" con las ids de las estaciones (por ejemplo, el
-devuelto por \code{\link[=siga_estaciones]{siga_estaciones()}}).}
+data.frame devuelto por \code{\link[=siga_estaciones]{siga_estaciones()}}).}
 
-\item{dir}{Directorio donde descargar los datos.}
+\item{dir}{Caracter, directorio donde descargar los datos. Por defecto
+se descargan los datos en un directorio temporal.}
 
 \item{forzar}{Forzar la descarga de archivos ya descargados.}
 }
@@ -25,5 +26,18 @@ devuelto por \code{\link[=siga_estaciones]{siga_estaciones()}}).}
 data.frames
 }
 \description{
-Descarga archivos del SIGA
+Esta familia de funciones permite leer y descargar archivos con datos
+meteorológicos y sus metadatos desde SIGA.
+}
+\examples{
+estaciones <- siga_estaciones()
+ids <- estaciones[1:2, ]
+siga_datos(ids)
+
+# Metadatos
+siga_metadatos(ids)
+
+# Descarga directa
+siga_descargar(ids)
+
 }
