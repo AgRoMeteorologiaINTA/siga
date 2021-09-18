@@ -23,7 +23,7 @@ Authors@R:
            role = c("cph")))
 Description: Descarga y lee datos del Sistema de Información y Gestión 
    Agrometeorológica del INTA <http://siga.inta.gov.ar/>.
-License: GPL-3 + file LICENSE
+License: GPL (>= 3)
 Encoding: UTF-8
 Language: es
 LazyData: true
