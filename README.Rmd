@@ -1,0 +1,81 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# siga
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+El paquete {siga} descarga y lee datos del [Sistema de Información y Gestión Agrometeorológica del INTA](http://siga.inta.gov.ar/).
+
+## Installation
+
+Para instalar la versión de desarrollo desde [GitHub](https://github.com/) usá:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("AgRoMeteorologiaINTA/siga")
+```
+## Ejemplo
+
+A continuación se muestra el uso de las funciones. Podés encontrar estos ejemplos usos en la viñeta, con
+
+```{r}
+vignette("descarga-datos", "siga")
+```
+
+Para acceder a la información de las estaciones diponibles se puede utilizar la función `siga_estaciones()`
+
+```{r example}
+library(siga)
+
+estaciones <- siga_estaciones()
+
+head(estaciones)
+```
+Por defecto el archivo con los metadatos de las estaciones se descarga en un directorio o carpeta temporal pero el argumento `archivo` permite indicar una dirección donde se guardará el archivo o se leerá el archivo en caso de que ya exista. Esta base de datos puede cambiar con el tiempo por lo que el argumento `forzar` permite volver a descargar el archivo de metadatos en caso de ser necesario. 
+
+Los metadatos incluyen una columna `id` con un código único por estación que puede usarse para darcargar los datos meteorológicos de determinadas estaciones con la función `siga_datos()`. 
+
+```{r}
+ids <- estaciones[1:2, ]
+ids
+```
+
+```{r}
+head(siga_datos(ids))
+```
+
+Las estaciones puede tener metadatos extra a los que puede accederse con la función `siga_metadatos()`.
+
+```{r}
+siga_metadatos(ids)
+```
+
+Para descargar los datos directamente a archivos existe la función `siga_descargar()`.
+
+```{r}
+archivos <- siga_descargar(ids)
+archivos
+```
+
+Nuevamente, por defecto se descargan en un directorio temporal pero se puede indicar una ubicación permanente con el argumento `dir`.
+
+## Cómo contribuir
+
+Para contribuir con este paquete podés leer la siguiente [guía para
+contribuir](https://github.com/AgRoMeteorologiaINTA/siga/blob/master/.github/CONTRIBUTING.md).
+Te pedimos también que revises nuestro [Código de
+Conducta](https://www.contributor-covenant.org/es/version/2/0/code_of_conduct/code_of_conduct.md).
