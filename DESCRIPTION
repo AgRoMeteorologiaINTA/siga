@@ -37,3 +37,7 @@ Imports:
     jsonlite,
     data.table,
     readxl
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

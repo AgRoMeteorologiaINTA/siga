@@ -1,0 +1,54 @@
+---
+title: "Cómo descargar datos de SIGA"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cómo descargar datos de SIGA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(siga)
+```
+
+El paquete siga permite descargar datos meteorológicos de las estaciones disponibles en el Sistema de Información y Gestión Agrometeorológica. Para acceder a la información de las estaciones diponibles se puede utilizar la función `siga_estaciones()`
+
+```{r}
+estaciones <- siga_estaciones()
+
+head(estaciones)
+```
+Por defecto el archivo con los metadatos de las estaciones se descarga en un directorio o carpeta temporal pero el argumento `archivo` permite indicar una dirección donde se guardará el archivo o se leerá el archivo en caso de que ya exista. Esta base de datos puede cambiar con el tiempo por lo que el argumento `forzar` permite volver a descargar el archivo de metadatos en caso de ser necesario. 
+
+Los metadatos incluyen una columna `id` con un código único por estación que puede usarse para darcargar los datos meteorológicos de determinadas estaciones con la función `siga_datos()`. 
+
+```{r}
+ids <- estaciones[1:2, ]
+ids
+```
+
+```{r}
+head(siga_datos(ids))
+```
+
+Las estaciones puede tener metadatos extra a los que puede accederse con la función `siga_metadatos()`.
+
+```{r}
+siga_metadatos(ids)
+```
+
+Para descargar los datos directamente a archivos existe la función `siga_descargar()`.
+
+```{r}
+archivos <- siga_descargar(ids)
+archivos
+```
+
+Nuevamente, por defecto se descargan en un directorio temporal pero se puede indicar una ubicación permanente con el argumento `dir`.
