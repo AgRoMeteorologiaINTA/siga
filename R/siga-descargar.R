@@ -60,7 +60,7 @@ siga_descargar <- function(ids, dir = tempdir(), forzar = TRUE) {
 
   status <- rep(0, length(ids))
 
-  base <- "http://siga.inta.gov.ar/document/series/"
+  base <- "http://siga.inta.gob.ar/document/series/"
   filenames <- paste0(ids, ".xls")
   urls <- paste0(base, filenames)
   locations <- file.path(tempdir(), filenames)
@@ -71,7 +71,7 @@ siga_descargar <- function(ids, dir = tempdir(), forzar = TRUE) {
   for (i in seq_along(ids)) {
     must_download <- forzar || !file.exists(data_files[i])
     if (must_download) {
-      download <- try(utils::download.file(url = urls[i], destfile = locations[i]), silent = TRUE)
+      download <- try(utils::download.file(url = urls[i], destfile = locations[i], mode = "wb"), silent = TRUE)
 
       if (inherits(download, "try-error")) {
         status[i] <- 1
@@ -165,7 +165,7 @@ siga_estaciones <- function(archivo = file.path(tempdir(), "siga_metadatos.csv")
 }
 
 stations_url <- function() {
-  servers <- "http://siga.inta.gov.ar/js/urlserver.js"
+  servers <- "http://siga.inta.gob.ar/js/urlserver.js"
 
   file <- tempfile()
   utils::download.file(servers, file, quiet = TRUE)
@@ -177,7 +177,7 @@ stations_url <- function() {
   line <- regmatches(line, regexpr("'.*'", line))
   line <- gsub("'", "", line)
 
-  url <- paste0("http://siga.inta.gov.ar/", line)
+  url <- paste0("http://siga.inta.gob.ar/", line)
 
   return(url)
 }

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-El paquete {siga} descarga y lee datos del [Sistema de Información y Gestión Agrometeorológica del INTA](http://siga.inta.gov.ar/).
+El paquete {siga} descarga y lee datos del [Sistema de Información y Gestión Agrometeorológica del INTA](http://siga.inta.gob.ar/).
 
 ## Installation
 
